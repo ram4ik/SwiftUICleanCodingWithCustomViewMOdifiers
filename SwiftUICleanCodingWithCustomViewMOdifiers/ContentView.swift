@@ -16,17 +16,7 @@ struct ContentView: View {
                     
                 }, label: {
                     Text("Continue")
-                        .foregroundColor(.white)
-                        .font(.system(size: 16))
-                        .padding(.horizontal, 14)
-                        .padding(.vertical, 10)
-                        .background(Color.blue)
-                    .overlay(
-                    RoundedRectangle(cornerRadius: 3)
-                        .strokeBorder(style: StrokeStyle(lineWidth: 1))
-                        .foregroundColor(Color(.sRGB, red: 0.1, green: 0.1, blue: 0.1, opacity: 1)))
-                    .cornerRadius(4)
-                        .shadow(color: .init(.sRGB, red: 0, green: 0, blue: 0, opacity: 0.5), radius: 5, x: 0, y: 0)
+                        .modifier(CustomModifier())
                     
                     
                 })
@@ -35,17 +25,7 @@ struct ContentView: View {
                     
                 }, label: {
                     Text("More Details")
-                        .foregroundColor(.white)
-                        .font(.system(size: 16))
-                        .padding(.horizontal, 14)
-                        .padding(.vertical, 10)
-                        .background(Color.green)
-                    .overlay(
-                    RoundedRectangle(cornerRadius: 3)
-                        .strokeBorder(style: StrokeStyle(lineWidth: 1))
-                        .foregroundColor(Color(.sRGB, red: 0.1, green: 0.1, blue: 0.1, opacity: 1)))
-                    .cornerRadius(4)
-                        .shadow(color: .init(.sRGB, red: 0, green: 0, blue: 0, opacity: 0.5), radius: 5, x: 0, y: 0)
+                        .modifier(CustomModifier(fontSize: 10, backgroundColor: .green))
                     
                     
                 })
@@ -54,19 +34,7 @@ struct ContentView: View {
                     
                 }, label: {
                     Text("Cancel")
-                        .foregroundColor(.white)
-                        .font(.system(size: 16))
-                        .padding(.horizontal, 14)
-                        .padding(.vertical, 10)
-                        .background(Color.red)
-                    .overlay(
-                    RoundedRectangle(cornerRadius: 3)
-                        .strokeBorder(style: StrokeStyle(lineWidth: 1))
-                        .foregroundColor(Color(.sRGB, red: 0.1, green: 0.1, blue: 0.1, opacity: 1)))
-                    .cornerRadius(4)
-                        .shadow(color: .init(.sRGB, red: 0, green: 0, blue: 0, opacity: 0.5), radius: 5, x: 0, y: 0)
-                    
-                    
+                        .modifier(CustomModifier(backgroundColor: .red))
                 })
             }
         }
@@ -76,5 +44,26 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct CustomModifier: ViewModifier {
+    
+    @State var fontSize: CGFloat = 16
+    @State var backgroundColor = Color.blue
+    
+    func body(content: Content) -> some View {
+        return content
+            .foregroundColor(.white)
+            .font(.system(size: fontSize))
+            .padding(.horizontal, 14)
+            .padding(.vertical, 10)
+            .background(backgroundColor)
+            .overlay(
+            RoundedRectangle(cornerRadius: 3)
+                .strokeBorder(style: StrokeStyle(lineWidth: 1))
+                .foregroundColor(Color(.sRGB, red: 0.1, green: 0.1, blue: 0.1, opacity: 1)))
+            .cornerRadius(4)
+                .shadow(color: .init(.sRGB, red: 0, green: 0, blue: 0, opacity: 0.5), radius: 5, x: 0, y: 0)
     }
 }
